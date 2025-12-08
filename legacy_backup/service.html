@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>บริการและประเภทรถ - King Win Transport</title>
+
+    <!-- Google Fonts: Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Prompt", "sans-serif"],
+            },
+            colors: {
+              gold: {
+                400: "#FCD34D",
+                500: "#D4AF37",
+                600: "#B8860B",
+                700: "#AA771C",
+              },
+              dark: {
+                900: "#0f0f0f",
+                800: "#1a1a1a",
+                700: "#2a2a2a",
+              },
+            },
+            backgroundImage: {
+              "hero-service":
+                "linear-gradient(to right bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2070&auto=format&fit=crop')",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Styles เดิมเพื่อความต่อเนื่อง */
+      body {
+        background-color: #0f0f0f;
+        color: #f3f4f6;
+      }
+
+      .text-gradient-gold {
+        background: linear-gradient(to right, #d4af37, #fcd34d, #d4af37);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% auto;
+        animation: shine 3s linear infinite;
+      }
+
+      .btn-gold {
+        background: linear-gradient(45deg, #d4af37, #fcd34d);
+        color: #000;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .btn-gold::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background: #fff;
+        opacity: 0.2;
+        transition: width 0.3s ease;
+        z-index: -1;
+        transform: skewX(-20deg);
+      }
+
+      .btn-gold:hover::before {
+        width: 150%;
+      }
+
+      .glass-nav {
+        background: rgba(15, 15, 15, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      }
+
+      @keyframes shine {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      /* Modal Animation */
+      .modal-content {
+        animation: slideUp 0.3s ease-out;
+      }
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* Image Hover Effect */
+      .vehicle-img-container:hover .overlay-view {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Navbar -->
+    <nav
+      id="navbar"
+      class="fixed w-full z-50 transition-all duration-300 py-4 top-0 glass-nav"
+    >
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div
+            class="bg-white/10 rounded-lg backdrop-blur-sm border border-gold-500/30 group-hover:border-gold-500 transition-colors"
+          >
+            <img
+              src="assets/kw_logo.png"
+              alt="KW Logo"
+              class="h-10 rounded-lg w-auto object-contain fallback-logo"
+            />
+          </div>
+          <div>
+            <h1 class="text-xl font-bold tracking-wider text-white">
+              KINGWIN <span class="text-gold-500">TRANSPORT</span>
+            </h1>
+            <p class="text-[10px] text-gray-400 tracking-[0.2em] uppercase">
+              Premium Bus Service
+            </p>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+          <a
+            href="index.html"
+            class="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide"
+            >หน้าแรก</a
+          >
+          <a
+            href="about.html"
+            class="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide"
+            >เกี่ยวกับเรา</a
+          >
+          <a
+            href="service.html"
+            class="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide"
+            >บริการ</a
+          >
+          <a
+            href="customers.html"
+            class="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide"
+            >ลูกค้าของเรา</a
+          >
+          <a
+            href="blog.html"
+            class="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide"
+            >บทความ</a
+          >
+          <a
+            href="contact.html"
+            class="btn-gold px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+            >ติดต่อเรา</a
+          >
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="menu-btn"
+          class="md:hidden text-gold-500 text-2xl focus:outline-none"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-8 md:hidden"
+      >
+        <button
+          id="close-menu"
+          class="absolute top-6 right-6 text-gold-500 text-3xl"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+        <a
+          href="index.html"
+          class="text-2xl font-light text-white hover:text-gold-500"
+          >หน้าแรก</a
+        >
+        <a
+          href="about.html"
+          class="text-2xl font-light text-white hover:text-gold-500"
+          >เกี่ยวกับเรา</a
+        >
+        <a href="service.html" class="text-2xl font-bold text-gold-500"
+          >บริการ</a
+        >
+        <a
+          href="#contact"
+          class="text-2xl font-bold text-white border border-gold-500 px-6 py-2 rounded-full"
+          >ติดต่อเรา</a
+        >
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section
+      class="relative h-[50vh] flex items-center justify-center bg-hero-service bg-cover bg-center bg-fixed bg-no-repeat mt-16"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent"
+      ></div>
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">
+          ประเภทรถ<span class="text-gradient-gold">ให้บริการ</span>
+        </h1>
+        <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+          เราคัดสรรรถคุณภาพเยี่ยม หลากหลายประเภท
+          เพื่อตอบโจทย์ทุกความต้องการในการเดินทางของคุณ
+        </p>
+      </div>
+    </section>
+
+    <!-- Vehicles List Section -->
+    <section class="py-24 bg-dark-900">
+      <div class="container mx-auto px-6">
+        <!-- Vehicle 1: 8 Meter Bus (Image Left) -->
+        <div class="flex flex-col md:flex-row gap-8 mb-24 items-center group">
+          <div
+            class="w-full md:w-1/2 relative vehicle-img-container cursor-pointer overflow-hidden rounded-2xl"
+            onclick="openGallery('bus8m')"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop"
+              alt="Bus 8 Meters"
+              class="w-full h-[350px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div
+              class="overlay-view absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 flex items-center justify-center"
+            >
+              <span
+                class="border border-gold-500 text-gold-500 px-6 py-2 rounded-full font-medium tracking-wide bg-black/60 backdrop-blur-sm"
+              >
+                <i class="fas fa-images mr-2"></i> ดูรูปภาพเพิ่มเติม
+              </span>
+            </div>
+            <div
+              class="absolute top-4 left-4 bg-gold-500 text-black font-bold px-4 py-1 rounded-md shadow-lg"
+            >
+              27 ที่นั่ง
+            </div>
+          </div>
+          <div class="w-full md:w-1/2">
+            <h3
+              class="text-gold-500 text-sm font-bold tracking-widest uppercase mb-2"
+            >
+              Compact Size
+            </h3>
+            <h2 class="text-3xl font-bold text-white mb-4">
+              รถบัสปรับอากาศ 8 เมตร
+            </h2>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+              รถบัสขนาดกลางที่มีความคล่องตัวสูง
+              เหมาะสำหรับเส้นทางที่รถใหญ่เข้าถึงยาก หรือกรุ๊ปเดินทางขนาดกลาง
+              ที่นั่งกว้างขวาง ปรับเอนได้ พร้อมสิ่งอำนวยความสะดวก
+            </p>
+
+            <!-- Features -->
+            <div class="grid grid-cols-2 gap-4 mb-8">
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-snowflake text-gold-500"></i> แอร์เย็นฉ่ำ Micro
+                Bus
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-music text-gold-500"></i> เครื่องเสียง /
+                Karaoke
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-usb text-gold-500"></i> ช่องชาร์จ USB
+                ทุกที่นั่ง
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-suitcase text-gold-500"></i> ช่องเก็บสัมภาระ
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <button
+                onclick="scrollToContact('รถบัส 8 เมตร')"
+                class="btn-gold px-8 py-3 rounded-full font-bold shadow-lg"
+              >
+                สนใจจองรถ <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+              <button
+                onclick="openGallery('bus8m')"
+                class="px-6 py-3 rounded-full border border-gray-600 text-gray-300 hover:border-gold-500 hover:text-gold-500 transition-colors"
+              >
+                ดูรูปภาพ
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicle 2: 12 Meter Bus (Image Left - Modified) -->
+        <div class="flex flex-col md:flex-row gap-8 mb-24 items-center group">
+          <div
+            class="w-full md:w-1/2 relative vehicle-img-container cursor-pointer overflow-hidden rounded-2xl"
+            onclick="openGallery('bus12m')"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2070&auto=format&fit=crop"
+              alt="Bus 12 Meters"
+              class="w-full h-[350px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div
+              class="overlay-view absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 flex items-center justify-center"
+            >
+              <span
+                class="border border-gold-500 text-gold-500 px-6 py-2 rounded-full font-medium tracking-wide bg-black/60 backdrop-blur-sm"
+              >
+                <i class="fas fa-images mr-2"></i> ดูรูปภาพเพิ่มเติม
+              </span>
+            </div>
+            <!-- Moved badge to left-4 for consistency -->
+            <div
+              class="absolute top-4 left-4 bg-gold-500 text-black font-bold px-4 py-1 rounded-md shadow-lg"
+            >
+              44 ที่นั่ง
+            </div>
+          </div>
+          <div class="w-full md:w-1/2">
+            <h3
+              class="text-gold-500 text-sm font-bold tracking-widest uppercase mb-2"
+            >
+              Full Size Coach
+            </h3>
+            <h2 class="text-3xl font-bold text-white mb-4">
+              รถบัสปรับอากาศ 12 เมตร
+            </h2>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+              พี่ใหญ่แห่งการเดินทาง เหมาะสำหรับการเดินทางไกล ทัศนศึกษา
+              หรือสัมมนาหมู่คณะขนาดใหญ่ มาพร้อมห้องสุขภัณฑ์ในตัว
+              และช่วงล่างถุงลมขับเคลื่อนนิ่มนวล
+            </p>
+
+            <!-- Features (Removed justify-items-end & flex-row-reverse) -->
+            <div class="grid grid-cols-2 gap-4 mb-8">
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-toilet text-gold-500"></i> ห้องสุขภัณฑ์
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-microphone-alt text-gold-500"></i>
+                คาราโอเกะสมบูรณ์แบบ
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-tv text-gold-500"></i> TV 3 จอ
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-couch text-gold-500"></i> เบาะนวดไฟฟ้า (บางคัน)
+              </div>
+            </div>
+
+            <!-- Button Order Adjusted -->
+            <div class="flex gap-4">
+              <button
+                onclick="scrollToContact('รถบัส 12 เมตร')"
+                class="btn-gold px-8 py-3 rounded-full font-bold shadow-lg"
+              >
+                สนใจจองรถ <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+              <button
+                onclick="openGallery('bus12m')"
+                class="px-6 py-3 rounded-full border border-gray-600 text-gray-300 hover:border-gold-500 hover:text-gold-500 transition-colors"
+              >
+                ดูรูปภาพ
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicle 3: VIP Van (Image Left) -->
+        <div class="flex flex-col md:flex-row gap-8 mb-24 items-center group">
+          <div
+            class="w-full md:w-1/2 relative vehicle-img-container cursor-pointer overflow-hidden rounded-2xl"
+            onclick="openGallery('vanvip')"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?q=80&w=2070&auto=format&fit=crop"
+              alt="VIP Van"
+              class="w-full h-[350px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div
+              class="overlay-view absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 flex items-center justify-center"
+            >
+              <span
+                class="border border-gold-500 text-gold-500 px-6 py-2 rounded-full font-medium tracking-wide bg-black/60 backdrop-blur-sm"
+              >
+                <i class="fas fa-images mr-2"></i> ดูรูปภาพเพิ่มเติม
+              </span>
+            </div>
+            <div
+              class="absolute top-4 left-4 bg-black border border-gold-500 text-gold-500 font-bold px-4 py-1 rounded-md shadow-lg"
+            >
+              VIP 9 ที่นั่ง
+            </div>
+          </div>
+          <div class="w-full md:w-1/2">
+            <h3
+              class="text-gold-500 text-sm font-bold tracking-widest uppercase mb-2"
+            >
+              Luxury & Private
+            </h3>
+            <h2 class="text-3xl font-bold text-white mb-4">
+              รถตู้ VIP All New
+            </h2>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+              สัมผัสความหรูหราเหนือระดับ กับรถตู้รุ่นใหม่ล่าสุด ตกแต่งภายในแบบ
+              VIP เต็มรูปแบบ เบาะกว้างนั่งสบายปรับไฟฟ้า เหมาะสำหรับผู้บริหาร
+              หรือการรับรองแขกคนสำคัญ
+            </p>
+
+            <!-- Features -->
+            <div class="grid grid-cols-2 gap-4 mb-8">
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-chair text-gold-500"></i> เบาะ Mickey Mouse
+                ปรับไฟฟ้า
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-wifi text-gold-500"></i> Free WiFi
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-lightbulb text-gold-500"></i> หลังคา VIP
+                Lighting
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-film text-gold-500"></i> Android TV
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <button
+                onclick="scrollToContact('รถตู้ VIP 9 ที่นั่ง')"
+                class="btn-gold px-8 py-3 rounded-full font-bold shadow-lg"
+              >
+                สนใจจองรถ <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+              <button
+                onclick="openGallery('vanvip')"
+                class="px-6 py-3 rounded-full border border-gray-600 text-gray-300 hover:border-gold-500 hover:text-gold-500 transition-colors"
+              >
+                ดูรูปภาพ
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicle 4: Commuter (Image Left - Modified) -->
+        <div class="flex flex-col md:flex-row gap-8 items-center group">
+          <div
+            class="w-full md:w-1/2 relative vehicle-img-container cursor-pointer overflow-hidden rounded-2xl"
+            onclick="openGallery('commuter')"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1559416523-140ddc3d238c?q=80&w=2000&auto=format&fit=crop"
+              alt="Commuter Van"
+              class="w-full h-[350px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div
+              class="overlay-view absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 flex items-center justify-center"
+            >
+              <span
+                class="border border-gold-500 text-gold-500 px-6 py-2 rounded-full font-medium tracking-wide bg-black/60 backdrop-blur-sm"
+              >
+                <i class="fas fa-images mr-2"></i> ดูรูปภาพเพิ่มเติม
+              </span>
+            </div>
+            <!-- Moved badge to left-4 for consistency -->
+            <div
+              class="absolute top-4 left-4 bg-gray-700 text-white font-bold px-4 py-1 rounded-md shadow-lg"
+            >
+              12 ที่นั่ง
+            </div>
+          </div>
+          <div class="w-full md:w-1/2">
+            <h3
+              class="text-gold-500 text-sm font-bold tracking-widest uppercase mb-2"
+            >
+              Standard & Value
+            </h3>
+            <h2 class="text-3xl font-bold text-white mb-4">รถตู้ Commuter</h2>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+              รถตู้รุ่นยอดนิยม มาตรฐานโรงงาน รองรับผู้โดยสารได้มากถึง 12-13 ท่าน
+              เหมาะสำหรับรถรับ-ส่งพนักงาน หรือการเดินทางที่เน้นความคุ้มค่า
+              ประหยัดค่าใช้จ่าย
+            </p>
+
+            <!-- Features (Removed justify-items-end & flex-row-reverse) -->
+            <div class="grid grid-cols-2 gap-4 mb-8">
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-users text-gold-500"></i> จุคนได้เยอะ
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-shield-alt text-gold-500"></i>
+                เข็มขัดนิรภัยทุกที่นั่ง
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-gas-pump text-gold-500"></i> ประหยัดน้ำมัน
+                (ดีเซล/NGV)
+              </div>
+              <div class="flex items-center gap-3 text-gray-300">
+                <i class="fas fa-map-marker-alt text-gold-500"></i> GPS Tracking
+              </div>
+            </div>
+
+            <!-- Button Order Adjusted -->
+            <div class="flex gap-4">
+              <button
+                onclick="scrollToContact('รถตู้ Commuter 12 ที่นั่ง')"
+                class="btn-gold px-8 py-3 rounded-full font-bold shadow-lg"
+              >
+                สนใจจองรถ <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+              <button
+                onclick="openGallery('commuter')"
+                class="px-6 py-3 rounded-full border border-gray-600 text-gray-300 hover:border-gold-500 hover:text-gold-500 transition-colors"
+              >
+                ดูรูปภาพ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div id="gallery-modal" class="fixed inset-0 z-[60] hidden">
+      <!-- Backdrop -->
+      <div
+        class="absolute inset-0 bg-black/90 backdrop-blur-sm"
+        onclick="closeGallery()"
+      ></div>
+
+      <!-- Content -->
+      <div class="absolute inset-0 flex items-center justify-center p-4">
+        <div
+          class="bg-dark-800 w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl border border-gray-700 modal-content flex flex-col max-h-[90vh]"
+        >
+          <!-- Header -->
+          <div
+            class="flex justify-between items-center p-4 border-b border-gray-700 bg-dark-900"
+          >
+            <h3 id="modal-title" class="text-xl font-bold text-gold-500">
+              รูปภาพรถ
+            </h3>
+            <button
+              onclick="closeGallery()"
+              class="text-gray-400 hover:text-white text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <!-- Gallery Grid (Scrollable) -->
+          <div class="p-4 overflow-y-auto flex-1">
+            <div
+              id="modal-grid"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
+              <!-- Images will be injected here via JS -->
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="p-4 border-t border-gray-700 bg-dark-900 text-center">
+            <p class="text-sm text-gray-400">
+              รูปภาพใช้เพื่อการโฆษณาเท่านั้น
+              รถจริงอาจมีการตกแต่งแตกต่างกันเล็กน้อย
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer (Same as Index) -->
+    <footer class="bg-black pt-20 pb-10 border-t border-gray-900">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-12 mb-16">
+          <div class="col-span-1 md:col-span-1">
+            <div class="flex items-center gap-2 mb-6">
+              <i class="fas fa-crown text-gold-500 text-3xl"></i>
+              <h2 class="text-2xl font-bold text-white">KING WIN</h2>
+            </div>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6">
+              มุ่งมั่นให้บริการขนส่งที่เหนือระดับ
+              ด้วยความปลอดภัยและความพึงพอใจสูงสุดของลูกค้าคือหัวใจสำคัญของเรา
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-6 text-lg">เมนูลัด</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="index.html"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >หน้าแรก</a
+                >
+              </li>
+              <li>
+                <a
+                  href="about.html"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >เกี่ยวกับเรา</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#services"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >บริการ</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#customers"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >ลูกค้าของเรา</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-6 text-lg">บริการ</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >รถบัส VIP</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >รถรับส่งพนักงาน</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >เช่าเหมารายวัน/ปี</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-6 text-lg">รับข่าวสาร</h4>
+            <p class="text-gray-500 text-sm mb-4">
+              สมัครสมาชิกเพื่อรับโปรโมชั่นพิเศษก่อนใคร
+            </p>
+            <div class="flex">
+              <input
+                type="email"
+                placeholder="อีเมลของคุณ"
+                class="bg-dark-800 text-white px-4 py-2 rounded-l-lg outline-none text-sm w-full border border-gray-700 focus:border-gold-500"
+              />
+              <button
+                class="bg-gold-500 text-black px-4 py-2 rounded-r-lg font-bold hover:bg-gold-400 transition-colors"
+              >
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-900 pt-8 text-center">
+          <p class="text-gray-600 text-sm">
+            &copy; 2024 King Win Transport Co., Ltd. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // === Navbar Logic ===
+      const navbar = document.getElementById("navbar");
+      const menuBtn = document.getElementById("menu-btn");
+      const closeMenu = document.getElementById("close-menu");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("glass-nav");
+          navbar.classList.remove("py-4");
+          navbar.classList.add("py-2");
+        } else {
+          navbar.classList.remove("glass-nav");
+          navbar.classList.remove("py-2");
+          navbar.classList.add("py-4");
+        }
+      });
+
+      menuBtn.addEventListener("click", () =>
+        mobileMenu.classList.remove("translate-x-full")
+      );
+      closeMenu.addEventListener("click", () =>
+        mobileMenu.classList.add("translate-x-full")
+      );
+
+      // === Contact Scroll Logic ===
+      function scrollToContact(vehicleName) {
+        const contactSection = document.getElementById("contact");
+        const selectBox = document.getElementById("vehicle-select");
+
+        // Scroll smoothly
+        contactSection.scrollIntoView({ behavior: "smooth" });
+
+        // Auto select the vehicle
+        if (vehicleName && selectBox) {
+          selectBox.value = vehicleName;
+        }
+      }
+
+      // === Gallery Data & Logic ===
+      const galleryData = {
+        bus8m: {
+          title: "แกลเลอรี่: รถบัสปรับอากาศ 8 เมตร",
+          images: [
+            "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800",
+            "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=800", // Interior placeholder
+            "https://images.unsplash.com/photo-1532939163844-547f958e91b4?q=80&w=800", // Exterior placeholder
+            "https://images.unsplash.com/photo-1532939163844-547f958e91b4?q=80&w=800", // Exterior placeholder
+            "https://images.unsplash.com/photo-1532939163844-547f958e91b4?q=80&w=800", // Exterior placeholder
+            "https://images.unsplash.com/photo-1532939163844-547f958e91b4?q=80&w=800", // Exterior placeholder
+          ],
+        },
+        bus12m: {
+          title: "แกลเลอรี่: รถบัสปรับอากาศ 12 เมตร",
+          images: [
+            "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=800",
+            "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800", // Interior
+            "https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?q=80&w=800", // Exterior
+          ],
+        },
+        vanvip: {
+          title: "แกลเลอรี่: รถตู้ VIP All New",
+          images: [
+            "https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?q=80&w=800",
+            "https://images.unsplash.com/photo-1632245889029-e412c6310525?q=80&w=800", // Seat detail
+            "https://images.unsplash.com/photo-1626998946777-65d4484b901e?q=80&w=800", // Interior
+          ],
+        },
+        commuter: {
+          title: "แกลเลอรี่: รถตู้ Commuter",
+          images: [
+            "https://images.unsplash.com/photo-1559416523-140ddc3d238c?q=80&w=800",
+            "https://images.unsplash.com/photo-1565514020176-db5084931553?q=80&w=800",
+            "https://images.unsplash.com/photo-1596440801833-281896d9f807?q=80&w=800",
+          ],
+        },
+      };
+
+      const modal = document.getElementById("gallery-modal");
+      const modalTitle = document.getElementById("modal-title");
+      const modalGrid = document.getElementById("modal-grid");
+
+      function openGallery(vehicleId) {
+        const data = galleryData[vehicleId];
+        if (!data) return;
+
+        modalTitle.innerText = data.title;
+        modalGrid.innerHTML = ""; // Clear old
+
+        data.images.forEach((imgSrc) => {
+          const imgDiv = document.createElement("div");
+          imgDiv.className =
+            "rounded-lg overflow-hidden h-64 border border-gray-700 hover:border-gold-500 transition-all";
+          imgDiv.innerHTML = `<img src="${imgSrc}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" alt="Gallery Image">`;
+          modalGrid.appendChild(imgDiv);
+        });
+
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden"; // Prevent background scroll
+      }
+
+      function closeGallery() {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "";
+      }
+
+      // Close modal on Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeGallery();
+      });
+
+      // Image Fallback
+      document.querySelectorAll("img").forEach((img) => {
+        img.onerror = function () {
+          if (this.classList.contains("fallback-logo")) return;
+          this.src =
+            "https://via.placeholder.com/800x600?text=Image+Unavailable";
+        };
+      });
+    </script>
+  </body>
+</html>

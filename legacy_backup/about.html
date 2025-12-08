@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      เกี่ยวกับเรา - King Win Transport บริการรถบัสเช่าเหมาและรับส่งพนักงาน
+    </title>
+
+    <!-- Google Fonts: Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Prompt", "sans-serif"],
+            },
+            colors: {
+              gold: {
+                400: "#FCD34D",
+                500: "#D4AF37",
+                600: "#B8860B",
+                700: "#AA771C",
+              },
+              dark: {
+                900: "#0f0f0f",
+                800: "#1a1a1a",
+                700: "#2a2a2a",
+              },
+            },
+            backgroundImage: {
+              "hero-pattern":
+                "linear-gradient(to right bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop')",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Styles เดิมจาก index.html เพื่อความต่อเนื่องของดีไซน์ */
+      body {
+        background-color: #0f0f0f;
+        color: #f3f4f6;
+      }
+
+      .text-gradient-gold {
+        background: linear-gradient(to right, #d4af37, #fcd34d, #d4af37);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% auto;
+        animation: shine 3s linear infinite;
+      }
+
+      .btn-gold {
+        background: linear-gradient(45deg, #d4af37, #fcd34d);
+        color: #000;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .btn-gold::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background: #fff;
+        opacity: 0.2;
+        transition: width 0.3s ease;
+        z-index: -1;
+        transform: skewX(-20deg);
+      }
+
+      .btn-gold:hover::before {
+        width: 150%;
+      }
+
+      .glass-nav {
+        background: rgba(15, 15, 15, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      }
+
+      .card-hover {
+        transition: all 0.4s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px -5px rgba(212, 175, 55, 0.15);
+        border-color: #d4af37;
+      }
+
+      @keyframes shine {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      /* Mobile Menu Animation */
+      .mobile-menu {
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .nav-link {
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #d4af37;
+        transition: width 0.3s;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .nav-link.active {
+        color: #fcd34d;
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Navbar -->
+    <nav
+      id="navbar"
+      class="fixed w-full z-50 transition-all duration-300 py-4 top-0 glass-nav"
+    >
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div
+            class="bg-white/10 rounded-lg backdrop-blur-sm border border-gold-500/30 group-hover:border-gold-500 transition-colors"
+          >
+            <img
+              src="assets/kw_logo.png"
+              alt="KW Logo"
+              class="h-10 rounded-lg w-auto object-contain fallback-logo"
+            />
+          </div>
+          <div>
+            <h1 class="text-xl font-bold tracking-wider text-white">
+              KINGWIN <span class="text-gold-500">TRANSPORT</span>
+            </h1>
+            <p class="text-[10px] text-gray-400 tracking-[0.2em] uppercase">
+              Premium Bus Service
+            </p>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+          <a
+            href="index.html"
+            class="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide"
+            >หน้าแรก</a
+          >
+          <a
+            href="about.html"
+            class="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide"
+            >เกี่ยวกับเรา</a
+          >
+          <a
+            href="service.html"
+            class="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide"
+            >บริการ</a
+          >
+          <a
+            href="customers.html"
+            class="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide"
+            >ลูกค้าของเรา</a
+          >
+          <a
+            href="blog.html"
+            class="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide"
+            >บทความ</a
+          >
+          <a
+            href="contact.html"
+            class="btn-gold px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+            >ติดต่อเรา</a
+          >
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="menu-btn"
+          class="md:hidden text-gold-500 text-2xl focus:outline-none"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-dark-900/95 backdrop-blur-xl z-40 transform translate-x-full mobile-menu flex flex-col justify-center items-center gap-8 md:hidden"
+      >
+        <button
+          id="close-menu"
+          class="absolute top-6 right-6 text-gold-500 text-3xl"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+        <a
+          href="index.html"
+          class="mobile-link text-2xl font-light text-white hover:text-gold-500"
+          >หน้าแรก</a
+        >
+        <a
+          href="about.html"
+          class="mobile-link text-2xl font-bold text-gold-500"
+          >เกี่ยวกับเรา</a
+        >
+        <a
+          href="index.html#services"
+          class="mobile-link text-2xl font-light text-white hover:text-gold-500"
+          >บริการ</a
+        >
+        <a
+          href="index.html#customers"
+          class="mobile-link text-2xl font-light text-white hover:text-gold-500"
+          >ลูกค้าของเรา</a
+        >
+        <a
+          href="index.html#blog"
+          class="mobile-link text-2xl font-light text-white hover:text-gold-500"
+          >บทความ</a
+        >
+        <a
+          href="index.html#contact"
+          class="mobile-link text-2xl font-bold text-white border border-gold-500 px-6 py-2 rounded-full"
+          >ติดต่อเรา</a
+        >
+      </div>
+    </nav>
+
+    <!-- Page Header / Mini Hero -->
+    <section
+      class="relative h-[50vh] flex items-center justify-center bg-hero-pattern bg-cover bg-center bg-fixed bg-no-repeat mt-16"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent"
+      ></div>
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">
+          เกี่ยวกับ <span class="text-gradient-gold">KING WIN</span>
+        </h1>
+        <div
+          class="flex justify-center gap-2 text-gray-400 text-sm tracking-wider uppercase"
+        >
+          <a href="index.html" class="hover:text-gold-500 transition-colors"
+            >หน้าแรก</a
+          >
+          <span>/</span>
+          <span class="text-gold-500">เกี่ยวกับเรา</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Company Story Section -->
+    <section class="py-24 bg-dark-900">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <!-- Text Content -->
+          <div class="order-2 md:order-1">
+            <h3 class="text-gold-500 font-bold tracking-widest uppercase mb-2">
+              Our Story
+            </h3>
+            <h2
+              class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight"
+            >
+              กว่า 10 ปี บนเส้นทาง<br />แห่งความภาคภูมิใจ
+            </h2>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+              บริษัท คิง วิน ทรานสปอร์ต จำกัด
+              ก่อตั้งขึ้นด้วยความมุ่งมั่นที่จะยกระดับมาตรฐานการให้บริการรถโดยสารไม่ประจำทางในประเทศไทย
+              จากจุดเริ่มต้นเล็กๆ เราได้เติบโตและพัฒนาอย่างต่อเนื่อง
+              จนได้รับความไว้วางใจจากองค์กรชั้นนำ โรงงานอุตสาหกรรม
+              และสถาบันการศึกษามากมาย
+            </p>
+            <p class="text-gray-400 mb-8 leading-relaxed">
+              เราไม่เพียงแค่ให้บริการรถรับ-ส่ง แต่เราส่งมอบ
+              "ประสบการณ์การเดินทาง" ที่ปลอดภัย สะดวกสบาย และประทับใจ
+              ด้วยทีมงานมืออาชีพและการบริหารจัดการที่ทันสมัย
+            </p>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-3 gap-6 border-t border-gray-800 pt-8">
+              <div>
+                <span class="block text-3xl font-bold text-gold-500 mb-1"
+                  >10+</span
+                >
+                <span class="text-xs text-gray-500 uppercase"
+                  >ปีประสบการณ์</span
+                >
+              </div>
+              <div>
+                <span class="block text-3xl font-bold text-gold-500 mb-1"
+                  >50+</span
+                >
+                <span class="text-xs text-gray-500 uppercase"
+                  >จำนวนรถในเครือ</span
+                >
+              </div>
+              <div>
+                <span class="block text-3xl font-bold text-gold-500 mb-1"
+                  >100%</span
+                >
+                <span class="text-xs text-gray-500 uppercase">ความพึงพอใจ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image Composition -->
+          <div class="order-1 md:order-2 relative">
+            <div
+              class="absolute -top-4 -right-4 w-24 h-24 bg-gold-500/10 rounded-full blur-2xl"
+            ></div>
+            <img
+              src="https://images.unsplash.com/photo-1556122071-e404ea5dd1b5?q=80&w=2070&auto=format&fit=crop"
+              alt="Office Team"
+              class="rounded-xl shadow-2xl border border-gray-800 relative z-10 w-full object-cover h-[400px]"
+            />
+            <!-- Quote Box -->
+            <div
+              class="absolute -bottom-6 -left-6 bg-dark-800 p-6 rounded-lg shadow-xl border border-gold-500/30 max-w-xs z-20 hidden md:block"
+            >
+              <p class="text-gold-400 italic font-medium mb-2">
+                "เราดูแลรถทุกคัน เหมือนรถของเราเอง ดูแลผู้โดยสาร
+                เหมือนคนในครอบครัว"
+              </p>
+              <p class="text-gray-500 text-xs text-right">
+                - ผู้บริหาร King Win
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision & Mission -->
+    <section class="py-20 bg-dark-800 relative overflow-hidden">
+      <!-- Background Decoration -->
+      <div
+        class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-5 pointer-events-none"
+      >
+        <i
+          class="fas fa-quote-right text-[400px] text-white absolute -top-20 -left-20"
+        ></i>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Vision -->
+          <div
+            class="bg-dark-900 p-10 rounded-2xl border border-gray-800 hover:border-gold-500/50 transition-colors group"
+          >
+            <div
+              class="w-16 h-16 bg-gold-500/10 rounded-xl flex items-center justify-center text-gold-500 text-3xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-all"
+            >
+              <i class="fas fa-eye"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4">
+              วิสัยทัศน์ (Vision)
+            </h3>
+            <p class="text-gray-400 leading-relaxed">
+              เป็นผู้นำด้านการให้บริการขนส่งผู้โดยสารที่ได้มาตรฐานสากล
+              ด้วยนวัตกรรมที่ทันสมัย และการบริการที่เป็นเลิศ
+              เพื่อยกระดับคุณภาพชีวิตการเดินทางของคนไทย
+            </p>
+          </div>
+
+          <!-- Mission -->
+          <div
+            class="bg-dark-900 p-10 rounded-2xl border border-gray-800 hover:border-gold-500/50 transition-colors group"
+          >
+            <div
+              class="w-16 h-16 bg-gold-500/10 rounded-xl flex items-center justify-center text-gold-500 text-3xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-all"
+            >
+              <i class="fas fa-rocket"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-4">
+              พันธกิจ (Mission)
+            </h3>
+            <ul class="space-y-3 text-gray-400">
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-gold-500 mt-1"></i>
+                <span>พัฒนาศักยภาพบุคลากรและการให้บริการอย่างต่อเนื่อง</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-gold-500 mt-1"></i>
+                <span>ดูแลรักษารถให้มีความพร้อมและปลอดภัยสูงสุด</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-gold-500 mt-1"></i>
+                <span>สร้างความพึงพอใจสูงสุดให้แก่ลูกค้า</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="py-24 bg-dark-900">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h3 class="text-gold-500 font-bold tracking-widest uppercase mb-2">
+            Our Values
+          </h3>
+          <h2 class="text-4xl font-bold text-white">ค่านิยมองค์กร</h2>
+          <div class="w-20 h-1 bg-gold-500 mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-6">
+          <!-- Value 1 -->
+          <div
+            class="bg-dark-800 p-8 rounded-xl text-center card-hover border border-gray-700"
+          >
+            <div
+              class="inline-block p-4 rounded-full bg-gold-500/10 text-gold-500 text-3xl mb-6"
+            >
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-3">Safety First</h4>
+            <p class="text-sm text-gray-400">
+              ความปลอดภัยต้องมาเป็นอันดับหนึ่งในทุกการเดินทาง
+            </p>
+          </div>
+          <!-- Value 2 -->
+          <div
+            class="bg-dark-800 p-8 rounded-xl text-center card-hover border border-gray-700"
+          >
+            <div
+              class="inline-block p-4 rounded-full bg-gold-500/10 text-gold-500 text-3xl mb-6"
+            >
+              <i class="fas fa-clock"></i>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-3">Punctuality</h4>
+            <p class="text-sm text-gray-400">
+              ตรงต่อเวลา คือหัวใจของการบริการรับ-ส่งพนักงาน
+            </p>
+          </div>
+          <!-- Value 3 -->
+          <div
+            class="bg-dark-800 p-8 rounded-xl text-center card-hover border border-gray-700"
+          >
+            <div
+              class="inline-block p-4 rounded-full bg-gold-500/10 text-gold-500 text-3xl mb-6"
+            >
+              <i class="fas fa-heart"></i>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-3">Service Mind</h4>
+            <p class="text-sm text-gray-400">
+              ให้บริการด้วยใจ ยิ้มแย้ม และเต็มใจช่วยเหลือ
+            </p>
+          </div>
+          <!-- Value 4 -->
+          <div
+            class="bg-dark-800 p-8 rounded-xl text-center card-hover border border-gray-700"
+          >
+            <div
+              class="inline-block p-4 rounded-full bg-gold-500/10 text-gold-500 text-3xl mb-6"
+            >
+              <i class="fas fa-tools"></i>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-3">Quality</h4>
+            <p class="text-sm text-gray-400">
+              รักษารถให้สะอาด ใหม่ และพร้อมใช้งานเสมอ
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safety Standards Highlight -->
+    <section
+      class="py-20 bg-gradient-to-r from-gold-600 to-gold-500 relative overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-black/10"></div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between gap-10"
+        >
+          <div class="md:w-2/3">
+            <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">
+              มั่นใจด้วยมาตรฐานความปลอดภัย GPS Tracking 24 ชม.
+            </h2>
+            <p class="text-black/80 text-lg mb-8 font-medium">
+              เราควบคุมความเร็วและพฤติกรรมการขับขี่แบบ Real-time
+              เพื่อความปลอดภัยสูงสุดของผู้โดยสารทุกคน
+            </p>
+            <ul
+              class="grid grid-cols-1 md:grid-cols-2 gap-4 text-black/90 font-semibold"
+            >
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check-circle"></i> จำกัดความเร็วไม่เกิน 90
+                กม./ชม.
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check-circle"></i> ตรวจแอลกอฮอล์พนักงานก่อนขับ
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check-circle"></i> เช็คสภาพรถก่อนออกเดินทาง
+              </li>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-check-circle"></i>
+                มีประกันภัยคุ้มครองทุกที่นั่ง
+              </li>
+            </ul>
+          </div>
+          <div class="md:w-1/3 text-center">
+            <a
+              href="index.html#contact"
+              class="inline-block bg-black text-white px-8 py-4 rounded-full font-bold shadow-2xl hover:bg-gray-900 hover:scale-105 transition-all"
+            >
+              ติดต่อจองรถเลย
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer (Same as Index) -->
+    <footer class="bg-black pt-20 pb-10 border-t border-gray-900">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-12 mb-16">
+          <div class="col-span-1 md:col-span-1">
+            <div class="flex items-center gap-2 mb-6">
+              <i class="fas fa-crown text-gold-500 text-3xl"></i>
+              <h2 class="text-2xl font-bold text-white">KING WIN</h2>
+            </div>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6">
+              มุ่งมั่นให้บริการขนส่งที่เหนือระดับ
+              ด้วยความปลอดภัยและความพึงพอใจสูงสุดของลูกค้าคือหัวใจสำคัญของเรา
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-6 text-lg">เมนูลัด</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="index.html"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >หน้าแรก</a
+                >
+              </li>
+              <li>
+                <a
+                  href="about.html"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >เกี่ยวกับเรา</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#services"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >บริการ</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#customers"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >ลูกค้าของเรา</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-6 text-lg">บริการ</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >รถบัส VIP</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >รถรับส่งพนักงาน</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-500 hover:text-gold-500 text-sm transition-colors"
+                  >เช่าเหมารายวัน/ปี</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-6 text-lg">รับข่าวสาร</h4>
+            <p class="text-gray-500 text-sm mb-4">
+              สมัครสมาชิกเพื่อรับโปรโมชั่นพิเศษก่อนใคร
+            </p>
+            <div class="flex">
+              <input
+                type="email"
+                placeholder="อีเมลของคุณ"
+                class="bg-dark-800 text-white px-4 py-2 rounded-l-lg outline-none text-sm w-full border border-gray-700 focus:border-gold-500"
+              />
+              <button
+                class="bg-gold-500 text-black px-4 py-2 rounded-r-lg font-bold hover:bg-gold-400 transition-colors"
+              >
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-900 pt-8 text-center">
+          <p class="text-gray-600 text-sm">
+            &copy; 2024 King Win Transport Co., Ltd. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Navbar Sticky & Glass Effect
+      const navbar = document.getElementById("navbar");
+
+      // Check on load in case of refresh at middle of page
+      if (window.scrollY > 50) {
+        navbar.classList.add("glass-nav");
+        navbar.classList.remove("py-4");
+        navbar.classList.add("py-2");
+      }
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("glass-nav");
+          navbar.classList.remove("py-4");
+          navbar.classList.add("py-2");
+        } else {
+          navbar.classList.remove("glass-nav");
+          navbar.classList.remove("py-2");
+          navbar.classList.add("py-4");
+        }
+      });
+
+      // Mobile Menu Toggle
+      const menuBtn = document.getElementById("menu-btn");
+      const closeMenu = document.getElementById("close-menu");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.remove("translate-x-full");
+      });
+
+      closeMenu.addEventListener("click", () => {
+        mobileMenu.classList.add("translate-x-full");
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("translate-x-full");
+        });
+      });
+
+      // Image Fallback logic
+      document.querySelectorAll("img").forEach((img) => {
+        img.onerror = function () {
+          if (this.classList.contains("fallback-logo")) {
+            // Replace broken logo with an icon
+            const iconDiv = document.createElement("i");
+            iconDiv.className = "fas fa-crown text-gold-500 text-2xl";
+            this.parentNode.appendChild(iconDiv);
+            this.style.display = "none";
+          } else {
+            // Replace other images with placeholder
+            this.src =
+              "https://via.placeholder.com/800x600?text=King+Win+Transport";
+          }
+        };
+      });
+    </script>
+  </body>
+</html>

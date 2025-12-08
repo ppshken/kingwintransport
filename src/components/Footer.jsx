@@ -8,7 +8,7 @@ export default function Footer() {
                     <div className="col-span-1 md:col-span-1">
                         <div className="flex items-center gap-2 mb-6">
                             <i className="fas fa-crown text-gold-500 text-3xl"></i>
-                            <h2 className="text-2xl font-bold text-white">KING WIN</h2>
+                            <h2 className="text-2xl font-bold text-white">KINGWIN TRANSPORT</h2>
                         </div>
                         <p className="text-gray-500 text-sm leading-relaxed mb-6">
                             มุ่งมั่นให้บริการขนส่งที่เหนือระดับ
@@ -41,13 +41,13 @@ export default function Footer() {
                         <h4 className="text-white font-bold mb-6 text-lg">บริการ</h4>
                         <ul className="space-y-3">
                             <li>
-                                <a href="#" className="text-gray-500 hover:text-gold-500 text-sm transition-colors">รถบัส VIP</a>
+                                <a href="/service" className="text-gray-500 hover:text-gold-500 text-sm transition-colors">รถบัส VIP</a>
                             </li>
                             <li>
-                                <a href="#" className="text-gray-500 hover:text-gold-500 text-sm transition-colors">รถรับส่งพนักงาน</a>
+                                <a href="/service" className="text-gray-500 hover:text-gold-500 text-sm transition-colors">รถรับส่งพนักงาน</a>
                             </li>
                             <li>
-                                <a href="#" className="text-gray-500 hover:text-gold-500 text-sm transition-colors">เช่าเหมารายวัน/ปี</a>
+                                <a href="/service" className="text-gray-500 hover:text-gold-500 text-sm transition-colors">เช่าเหมารายวัน/ปี</a>
                             </li>
                         </ul>
                     </div>

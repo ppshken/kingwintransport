@@ -73,6 +73,7 @@ export default function Contacts() {
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ชื่อ</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">เบอร์โทร</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">เรื่อง</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ข้อความ</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">สถานะ</th>
                                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">จัดการ</th>
                             </tr>
@@ -86,6 +87,7 @@ export default function Contacts() {
                                     <td className="px-6 py-4 text-sm text-gray-900 font-medium">{contact.name}</td>
                                     <td className="px-6 py-4 text-sm text-gray-500">{contact.phone}</td>
                                     <td className="px-6 py-4 text-sm text-gray-900">{contact.subject}</td>
+                                    <td className="px-6 py-4 text-sm text-gray-900">{contact.message}</td>
                                     <td className="px-6 py-4 text-sm">{getStatusBadge(contact.status)}</td>
                                     <td className="px-6 py-4 text-sm text-right">
                                         <select

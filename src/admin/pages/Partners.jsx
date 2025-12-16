@@ -1,20 +1,17 @@
 import { useState, useEffect } from 'react';
 import AdminLayout from '../components/AdminLayout';
 import Modal from '../components/Modal';
-import { customerService } from '../../services/customerService';
+import { partnerService } from '../../services/partnerService';
 import { showSuccess, showError, showConfirm } from '../../utils/sweetalert';
 
-export default function Customers() {
-    const [customers, setCustomers] = useState([]);
+export default function Partners() {
+    const [partners, setPartners] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
     const [formData, setFormData] = useState({
-        title: '',
-        subtitle: '',
-        description: '',
-        image: '',
-        tags: '',
+        name: '',
+        logo_url: '',
         is_active: true,
         display_order: 0
     });
@@ -25,8 +22,8 @@ export default function Customers() {
 
     const loadData = async () => {
         try {
-            const data = await customerService.getAll();
-            setCustomers(data);
+            const data = await partnerService.getAll();
+            setPartners(data);
         } catch (error) {
             showError('เกิดข้อผิดพลาดในการโหลดข้อมูล: ' + error.message);
         } finally {
@@ -37,11 +34,8 @@ export default function Customers() {
     const handleAdd = () => {
         setEditingItem(null);
         setFormData({
-            title: '',
-            subtitle: '',
-            description: '',
-            image: '',
-            tags: '',
+            name: '',
+            logo_url: '',
             is_active: true,
             display_order: 0
         });
@@ -51,11 +45,8 @@ export default function Customers() {
     const handleEdit = (item) => {
         setEditingItem(item);
         setFormData({
-            title: item.title,
-            subtitle: item.subtitle || '',
-            description: item.description || '',
-            image: item.image || '',
-            tags: Array.isArray(item.tags) ? item.tags.join(', ') : (item.tags || ''),
+            name: item.name,
+            logo_url: item.logo_url || '',
             is_active: item.is_active,
             display_order: item.display_order || 0
         });
@@ -63,13 +54,13 @@ export default function Customers() {
     };
 
     const handleDelete = async (id) => {
-        const confirmed = await showConfirm('ข้อมูลจะถูกลบอย่างถาวร', 'ต้องการลบกิจกรรมนี้?');
+        const confirmed = await showConfirm('ข้อมูลจะถูกลบอย่างถาวร', 'ต้องการลบพาร์ทเนอร์นี้?');
         if (!confirmed) return;
 
         try {
-            await customerService.delete(id);
+            await partnerService.delete(id);
             loadData();
-            showSuccess('ลบกิจกรรมสำเร็จ');
+            showSuccess('ลบพาร์ทเนอร์สำเร็จ');
         } catch (error) {
             showError('เกิดข้อผิดพลาด: ' + error.message);
         }
@@ -77,8 +68,8 @@ export default function Customers() {
 
     const handleToggleActive = async (id, currentStatus) => {
         try {
-            const customer = customers.find(c => c.id === id);
-            await customerService.update(id, { ...customer, is_active: !currentStatus });
+            const partner = partners.find(c => c.id === id);
+            await partnerService.update(id, { ...partner, is_active: !currentStatus });
             loadData();
         } catch (error) {
             alert('เกิดข้อผิดพลาด: ' + error.message);
@@ -89,30 +80,17 @@ export default function Customers() {
         e.preventDefault();
 
         try {
-            // Convert comma-separated tags to array
-            const tagsArray = formData.tags
-                ? formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag)
-                : [];
-
-            const submitData = {
-                ...formData,
-                tags: tagsArray
-            };
-
             if (editingItem) {
-                await customerService.update(editingItem.id, submitData);
-                showSuccess('แก้ไขกิจกรรมสำเร็จ');
+                await partnerService.update(editingItem.id, formData);
+                showSuccess('แก้ไขข้อมูลพาร์ทเนอร์สำเร็จ');
             } else {
-                await customerService.create(submitData);
-                showSuccess('เพิ่มกิจกรรมสำเร็จ');
+                await partnerService.create(formData);
+                showSuccess('เพิ่มพาร์ทเนอร์สำเร็จ');
             }
             setIsModalOpen(false);
             loadData();
         } catch (error) {
-            console.error('Error creating/updating customer:', error);
-            console.error('Error response:', error.response?.data);
-            const errorMsg = error.response?.data?.message || error.message || 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ';
-            showError('เกิดข้อผิดพลาด: ' + errorMsg);
+            showError('เกิดข้อผิดพลาด: ' + error.message);
         }
     };
 
@@ -120,15 +98,15 @@ export default function Customers() {
         <AdminLayout>
             <div className="flex items-center justify-between mb-6">
                 <div>
-                    <h3 className="text-xl font-bold text-gray-700">จัดการกิจกรรมลูกค้า</h3>
-                    <p className="text-gray-500 text-sm">จำนวนทั้งหมด: {customers.length} รายการ</p>
+                    <h3 className="text-xl font-bold text-gray-700">จัดการพาร์ทเนอร์</h3>
+                    <p className="text-gray-500 text-sm">จำนวนทั้งหมด: {partners.length} รายการ</p>
                 </div>
                 <button
                     onClick={handleAdd}
                     className="px-6 py-3 bg-gold-500 hover:bg-gold-400 text-black font-bold rounded-lg transition-colors flex items-center gap-2"
                 >
                     <i className="fas fa-plus"></i>
-                    เพิ่มกิจกรรม
+                    เพิ่มพาร์ทเนอร์
                 </button>
             </div>
 
@@ -142,43 +120,19 @@ export default function Customers() {
                         <thead className="bg-gray-50 border-b">
                             <tr>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">หัวข้อ</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">องค์กร</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tags</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ชื่อพาร์ทเนอร์</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Logo URL</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ลำดับ</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">สถานะ</th>
                                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">จัดการ</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                            {customers.map((item) => (
+                            {partners.map((item) => (
                                 <tr key={item.id} className="hover:bg-gray-50">
                                     <td className="px-6 py-4 text-sm text-gray-900">{item.id}</td>
-                                    <td className="px-6 py-4">
-                                        <div className="text-sm font-medium text-gray-900">{item.title}</div>
-                                        <div className="text-xs text-gray-500 truncate max-w-xs">{item.description}</div>
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-gray-600">{item.subtitle || '-'}</td>
-                                    <td className="px-6 py-4 text-sm text-gray-600">
-                                        <div className="flex flex-wrap gap-1">
-                                            {(() => {
-                                                // Convert tags to array if it's a string
-                                                const tagsArray = Array.isArray(item.tags)
-                                                    ? item.tags
-                                                    : (item.tags ? item.tags.split(',').map(t => t.trim()) : []);
-
-                                                return tagsArray.length > 0 ? (
-                                                    tagsArray.slice(0, 2).map((tag, idx) => (
-                                                        <span key={idx} className="px-2 py-1 bg-gold-100 text-gold-800 text-xs rounded">
-                                                            {tag}
-                                                        </span>
-                                                    ))
-                                                ) : (
-                                                    <span className="text-gray-400 text-xs">-</span>
-                                                );
-                                            })()}
-                                        </div>
-                                    </td>
+                                    <td className="px-6 py-4 text-sm text-gray-900 font-medium">{item.name}</td>
+                                    <td className="px-6 py-4 text-sm text-blue-600 truncate max-w-xs">{item.logo_url || '-'}</td>
                                     <td className="px-6 py-4 text-sm text-gray-500">{item.display_order}</td>
                                     <td className="px-6 py-4 text-sm">
                                         <button
@@ -212,7 +166,7 @@ export default function Customers() {
                         </tbody>
                     </table>
 
-                    {customers.length === 0 && (
+                    {partners.length === 0 && (
                         <div className="text-center py-12 text-gray-500">
                             <i className="fas fa-inbox text-4xl mb-2 block"></i>
                             ยังไม่มีข้อมูล
@@ -224,68 +178,30 @@ export default function Customers() {
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                title={editingItem ? 'แก้ไขกิจกรรม' : 'เพิ่มกิจกรรมใหม่'}
+                title={editingItem ? 'แก้ไขพาร์ทเนอร์' : 'เพิ่มพาร์ทเนอร์ใหม่'}
             >
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">หัวข้อกิจกรรม *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">ชื่อพาร์ทเนอร์ *</label>
                         <input
                             type="text"
-                            value={formData.title}
-                            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent text-gray-900"
-                            placeholder="เช่น พาน้องๆไปทัศนศึกษา"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">องค์กร/สถานที่</label>
-                        <input
-                            type="text"
-                            value={formData.subtitle}
-                            onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent text-gray-900"
-                            placeholder="เช่น โรงเรียนเตรียมอุดมศึกษาพัฒนาการ"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">รายละเอียด</label>
-                        <textarea
-                            value={formData.description}
-                            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent text-gray-900"
-                            rows="3"
-                            placeholder="รายละเอียดของกิจกรรม"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Image URL *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Logo URL</label>
                         <input
                             type="url"
-                            value={formData.image}
-                            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                            value={formData.logo_url}
+                            onChange={(e) => setFormData({ ...formData, logo_url: e.target.value })}
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent text-gray-900"
-                            placeholder="https://example.com/image.jpg"
-                            required
+                            placeholder="https://example.com/logo.png"
                         />
-                        {formData.image && (
-                            <img src={formData.image} alt="Preview" className="mt-2 h-32 object-cover rounded" />
-                        )}
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Tags (คั่นด้วยเครื่องหมายจุลภาค)</label>
-                        <input
-                            type="text"
-                            value={formData.tags}
-                            onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent text-gray-900"
-                            placeholder="เช่น ทัศนศึกษา, โรงเรียน"
-                        />
-                        <p className="text-xs text-gray-500 mt-1">แยก tags ด้วยเครื่องหมายจุลภาค (,)</p>
+                        <p className="text-xs text-gray-500 mt-1">URL รูป logo ของพาร์ทเนอร์</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">

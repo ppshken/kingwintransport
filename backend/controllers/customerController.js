@@ -17,10 +17,16 @@ exports.getAll = async (req, res) => {
 
         const [customers] = await pool.query(query, params);
 
+        // Parse tags from comma-separated string to array
+        const customersWithTags = customers.map(customer => ({
+            ...customer,
+            tags: customer.tags ? customer.tags.split(',') : []
+        }));
+
         res.json({
             success: true,
-            count: customers.length,
-            data: customers
+            count: customersWithTags.length,
+            data: customersWithTags
         });
 
     } catch (error) {
@@ -49,9 +55,15 @@ exports.getById = async (req, res) => {
             });
         }
 
+        // Parse tags from comma-separated string to array
+        const customer = {
+            ...customers[0],
+            tags: customers[0].tags ? customers[0].tags.split(',') : []
+        };
+
         res.json({
             success: true,
-            data: customers[0]
+            data: customer
         });
 
     } catch (error) {
@@ -66,55 +78,69 @@ exports.getById = async (req, res) => {
 // Create customer
 exports.create = async (req, res) => {
     try {
-        const { name, logo_url, display_order, is_active } = req.body;
+        const { title, subtitle, description, image, tags, display_order, is_active } = req.body;
+
+        // Convert tags array to comma-separated string
+        const tagsString = Array.isArray(tags) ? tags.join(',') : tags || '';
 
         const [result] = await pool.query(
-            'INSERT INTO customers (name, logo_url, display_order, is_active) VALUES (?, ?, ?, ?)',
-            [name, logo_url, display_order || 0, is_active !== undefined ? is_active : true]
+            'INSERT INTO customers (title, subtitle, description, image, tags, display_order, is_active) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [title, subtitle, description, image, tagsString, display_order || 0, is_active !== undefined ? is_active : true]
         );
 
         res.status(201).json({
             success: true,
-            message: 'เพิ่มลูกค้าสำเร็จ',
+            message: 'เพิ่มกิจกรรมสำเร็จ',
             data: {
                 id: result.insertId,
-                name,
-                logo_url,
+                title,
+                subtitle,
+                description,
+                image,
+                tags: Array.isArray(tags) ? tags : tagsString.split(','),
                 display_order,
                 is_active
             }
         });
 
+
     } catch (error) {
         console.error('Create customer error:', error);
+        console.error('SQL Error:', error.sqlMessage);
+        console.error('Request body:', req.body);
         res.status(500).json({
             success: false,
-            message: 'เกิดข้อผิดพลาดในการเพิ่มลูกค้า'
+            message: 'เกิดข้อผิดพลาดในการเพิ่มกิจกรรม',
+            error: error.sqlMessage || error.message
         });
     }
 };
+
 
 // Update customer
 exports.update = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, logo_url, display_order, is_active } = req.body;
+        const { title, subtitle, description, image, tags, display_order, is_active } = req.body;
+
+        // Convert tags array to comma-separated string
+        const tagsString = Array.isArray(tags) ? tags.join(',') : tags || '';
 
         const [result] = await pool.query(
-            'UPDATE customers SET name = ?, logo_url = ?, display_order = ?, is_active = ? WHERE id = ?',
-            [name, logo_url, display_order, is_active, id]
+            'UPDATE customers SET title = ?, subtitle = ?, description = ?, image = ?, tags = ?, display_order = ?, is_active = ? WHERE id = ?',
+            [title, subtitle, description, image, tagsString, display_order, is_active, id]
         );
 
         if (result.affectedRows === 0) {
             return res.status(404).json({
                 success: false,
-                message: 'ไม่พบข้อมูลลูกค้า'
+                message: 'ไม่พบข้อมูลกิจกรรม'
             });
         }
 
         res.json({
             success: true,
-            message: 'อัปเดตลูกค้าสำเร็จ'
+            message: 'อัปเดตกิจกรรมสำเร็จ'
         });
 
     } catch (error) {
@@ -145,7 +171,7 @@ exports.delete = async (req, res) => {
 
         res.json({
             success: true,
-            message: 'ลบลูกค้าสำเร็จ'
+            message: 'ลบกิจกรรมสำเร็จ'
         });
 
     } catch (error) {

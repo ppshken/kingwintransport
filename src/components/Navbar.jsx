@@ -52,6 +52,7 @@ export default function Navbar() {
                     <Link to="/about" className="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide">เกี่ยวกับเรา</Link>
                     <Link to="/service" className="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide">บริการ</Link>
                     <Link to="/customers" className="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide">ลูกค้าของเรา</Link>
+                    <Link to="/partner" className="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide">คู่ค้าของเรา</Link>
                     <Link to="/blog" className="nav-link text-sm font-medium text-gray-300 hover:text-gold-400 uppercase tracking-wide">บทความ</Link>
                     <Link to="/contact" className="btn-gold px-6 py-2 rounded-full font-bold shadow-[0_0_15px_rgba(212,175,55,0.4)]">ติดต่อเรา</Link>
                 </div>
@@ -82,6 +83,7 @@ export default function Navbar() {
                 <Link to="/about" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>เกี่ยวกับเรา</Link>
                 <Link to="/service" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>บริการ</Link>
                 <Link to="/customers" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>ลูกค้าของเรา</Link>
+                <Link to="/partner" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>คู่ค้าของเรา</Link>
                 <Link to="/blog" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>บทความ</Link>
                 <Link to="/contact" className="mobile-link text-2xl font-bold text-gold-500" onClick={() => setIsOpen(false)}>ติดต่อเรา</Link>
             </div>

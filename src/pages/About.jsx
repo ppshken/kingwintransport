@@ -184,6 +184,112 @@ export default function About() {
                 </div>
             </section>
 
+            {/* Our Standards Section (Reference: Abc Journeys) */}
+            <section className="py-20 bg-dark-800">
+                <div className="container mx-auto px-6">
+                    <div className="text-center mb-16">
+                        <h3 className="text-gold-500 font-bold tracking-widest uppercase mb-2">
+                            Standards
+                        </h3>
+                        <h2 className="text-3xl md:text-4xl font-bold text-white">
+                            มาตรฐานการบริการของเรา
+                        </h2>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {/* Standard 1: Safety */}
+                        <div className="bg-dark-900 border border-gray-800 rounded-2xl overflow-hidden hover:border-gold-500/50 transition-all group">
+                            <div className="p-8">
+                                <div className="w-14 h-14 bg-gold-500/10 rounded-lg flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-all">
+                                    <i className="fas fa-satellite-dish"></i>
+                                </div>
+                                <h4 className="text-xl font-bold text-white mb-4">ระบบมาตรฐานและความปลอดภัย</h4>
+                                <p className="text-gray-400 text-sm leading-relaxed">
+                                    เรามีระบบรักษาความปลอดภัยคุณภาพสูงสุด ติดตั้งเข็มขัดนิรภัยทุกที่นั่ง
+                                    ระบบ GPS Tracking ควบคุมความเร็ว และกล้องวงจรปิด CCTV
+                                    รวมถึงพื้นรถชนิดพิเศษกันลื่น เพื่อให้คุณเดินทางไกลได้อย่างมั่นใจและปลอดภัยที่สุด
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Standard 2: Training */}
+                        <div className="bg-dark-900 border border-gray-800 rounded-2xl overflow-hidden hover:border-gold-500/50 transition-all group">
+                            <div className="p-8">
+                                <div className="w-14 h-14 bg-gold-500/10 rounded-lg flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-all">
+                                    <i className="fas fa-chalkboard-teacher"></i>
+                                </div>
+                                <h4 className="text-xl font-bold text-white mb-4">การฝึกอบรมพนักงาน</h4>
+                                <p className="text-gray-400 text-sm leading-relaxed">
+                                    พนักงานขับรถทุกคนต้องผ่านการอบรมด้านการบริการ การขับขี่ปลอดภัย
+                                    การซ่อมบำรุงเบื้องต้น รวมถึงการฝึกอบรมเผชิญเหตุฉุกเฉิน
+                                    ซ้อมดับเพลิง และการปฐมพยาบาลเบื้องต้น เพื่อความพร้อมในทุกสถานการณ์
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Standard 3: Maintenance */}
+                        <div className="bg-dark-900 border border-gray-800 rounded-2xl overflow-hidden hover:border-gold-500/50 transition-all group">
+                            <div className="p-8">
+                                <div className="w-14 h-14 bg-gold-500/10 rounded-lg flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-all">
+                                    <i className="fas fa-wrench"></i>
+                                </div>
+                                <h4 className="text-xl font-bold text-white mb-4">การซ่อมบำรุงรักษาเต็มรูปแบบ</h4>
+                                <p className="text-gray-400 text-sm leading-relaxed">
+                                    รถทุกคันต้องเข้าเช็คระยะทุก 10,000 กม. หรือ 3 เดือน
+                                    โดยเน้นตรวจสอบ 4 ระบบหลักสำคัญ: ช่วงล่าง, เครื่องยนต์, ระบบแอร์,
+                                    และระบบไฟฟ้า เพื่อให้รถมีประสิทธิภาพสมบูรณ์พร้อมให้บริการเสมอ
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Standard 4: Alcohol Check */}
+                        <div className="bg-dark-900 border border-gray-800 rounded-2xl overflow-hidden hover:border-gold-500/50 transition-all group">
+                            <div className="p-8">
+                                <div className="w-14 h-14 bg-gold-500/10 rounded-lg flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-all">
+                                    <i className="fas fa-user-check"></i>
+                                </div>
+                                <h4 className="text-xl font-bold text-white mb-4">มาตรการตรวจวัดแอลกอฮอล์</h4>
+                                <p className="text-gray-400 text-sm leading-relaxed">
+                                    ความปลอดภัยคือสิ่งสำคัญที่สุด เรามีการตรวจวัดแอลกอฮอล์พนักงานขับรถทุกคน
+                                    ก่อนออกเดินทางทุกครั้ง และมีทีมงาน Surprise Check ลงพื้นที่ตรวจสอบแบบสุ่ม
+                                    เพื่อสร้างความมั่นใจสูงสุดให้กับลูกค้า
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Standard 5: Uniform & Image */}
+                        <div className="bg-dark-900 border border-gray-800 rounded-2xl overflow-hidden hover:border-gold-500/50 transition-all group">
+                            <div className="p-8">
+                                <div className="w-14 h-14 bg-gold-500/10 rounded-lg flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-all">
+                                    <i className="fas fa-tshirt"></i>
+                                </div>
+                                <h4 className="text-xl font-bold text-white mb-4">เครื่องแต่งกายและบุคลิกภาพ</h4>
+                                <p className="text-gray-400 text-sm leading-relaxed">
+                                    ชุดยูนิฟอร์มที่สะอาด เรียบร้อย สง่าผ่าเผย สะท้อนถึงความเป็นมืออาชีพ
+                                    สร้างความน่าเชื่อถือให้กับผู้ใช้บริการ พนักงานของเราได้รับการปลูกฝัง
+                                    ทัศนคติที่ดี มีใจรักงานบริการ (Service Mind) พร้อมดูแลคุณตลอดเส้นทาง
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Standard 6: Call Center */}
+                        <div className="bg-dark-900 border border-gray-800 rounded-2xl overflow-hidden hover:border-gold-500/50 transition-all group">
+                            <div className="p-8">
+                                <div className="w-14 h-14 bg-gold-500/10 rounded-lg flex items-center justify-center text-gold-500 text-2xl mb-6 group-hover:bg-gold-500 group-hover:text-black transition-all">
+                                    <i className="fas fa-headset"></i>
+                                </div>
+                                <h4 className="text-xl font-bold text-white mb-4">Call Center 24 ชม.</h4>
+                                <p className="text-gray-400 text-sm leading-relaxed">
+                                    เรามีทีมงานคอยให้บริการรับฟังและแก้ไขปัญหาให้ลูกค้าตลอด 24 ชั่วโมง
+                                    ทั้งการติดต่อประสานงาน และการรับฟังความคิดเห็นเพื่อนำมาพัฒนาปรับปรุง
+                                    การบริการให้ดียิ่งขึ้น ตอบโจทย์ทุกความต้องการของลูกค้า
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Safety Standards Highlight */}
             <section className="py-20 bg-gradient-to-r from-gold-600 to-gold-500 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/10"></div>

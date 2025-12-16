@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { customerService } from '../services/customerService';
 
 export default function CustomerSection() {
@@ -11,9 +12,10 @@ export default function CustomerSection() {
 
     const loadCustomers = async () => {
         try {
-            // Get only active customers
-            const data = await customerService.getAll(true);
-            setCustomers(data);
+            // Get only active customers, limit to 6 for homepage
+            const data = await customerService.getActive();
+            // Show only first 6 items for homepage
+            setCustomers(data.slice(0, 6));
         } catch (error) {
             console.error('Error loading customers:', error);
         } finally {
@@ -21,45 +23,94 @@ export default function CustomerSection() {
         }
     };
 
-    return (
-        <section id="customers" className="py-20 bg-dark-900 border-y border-gray-800">
-            <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-                    <div>
-                        <h3 className="text-gold-500 font-bold tracking-widest uppercase mb-2">
-                            Our Clients
-                        </h3>
-                        <h2 className="text-3xl md:text-4xl font-bold text-white">
-                            ลูกค้าที่ไว้วางใจเรา
-                        </h2>
+    if (loading) {
+        return (
+            <section className="py-24 bg-dark-800">
+                <div className="container mx-auto px-6">
+                    <div className="flex items-center justify-center py-20">
+                        <i className="fas fa-spinner fa-spin text-6xl text-gold-500"></i>
                     </div>
-                    <p className="text-gray-400 mt-4 md:mt-0 max-w-md text-right">
-                        เราภูมิใจที่ได้เป็นส่วนหนึ่งในการเดินทางขององค์กรชั้นนำมากมาย
+                </div>
+            </section>
+        );
+    }
+
+    if (customers.length === 0) {
+        return null; // Don't show section if no activities
+    }
+
+    return (
+        <section className="py-24 bg-dark-800">
+            <div className="container mx-auto px-6">
+                {/* Section Header */}
+                <div className="text-center mb-16">
+                    <h3 className="text-gold-500 font-bold tracking-widest uppercase mb-2">
+                        Our Customers
+                    </h3>
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                        ลูกค้า<span className="text-gradient-gold">ของเรา</span>
+                    </h2>
+                    <p className="text-gray-400 max-w-2xl mx-auto">
+                        ภาพบรรยากาศการให้บริการลูกค้าของเรา
                     </p>
                 </div>
 
-                {loading ? (
-                    <div className="text-center py-12">
-                        <i className="fas fa-spinner fa-spin text-4xl text-gold-500"></i>
-                        <p className="text-gray-400 mt-4">กำลังโหลดข้อมูล...</p>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                        {customers.map((customer) => (
-                            <div
-                                key={customer.id}
-                                className="h-44 bg-dark-800 rounded-lg flex flex-col gap-1 items-center justify-center grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all border border-gray-800 hover:border-gold-500/50"
-                            >
+                {/* Activities Grid */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    {customers.map((activity) => (
+                        <div
+                            key={activity.id}
+                            className="bg-dark-900 rounded-2xl overflow-hidden border border-gray-700 card-hover group"
+                        >
+                            {/* Image */}
+                            <div className="relative h-56 overflow-hidden">
                                 <img
-                                    src={customer.logo_url}
-                                    alt={customer.name}
-                                    className="max-h-24 max-w-full object-contain"
+                                    src={activity.image}
+                                    alt={activity.title}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    onError={(e) => {
+                                        e.target.src = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800';
+                                    }}
                                 />
-                                <span className="text-xl font-bold text-gray-500">{customer.name}</span>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                                {/* Tag */}
+                                {activity.tags && activity.tags.length > 0 && (
+                                    <div className="absolute top-4 left-4">
+                                        <span className="px-3 py-1 bg-gold-500 text-black text-xs font-bold rounded-full">
+                                            {activity.tags[0]}
+                                        </span>
+                                    </div>
+                                )}
                             </div>
-                        ))}
-                    </div>
-                )}
+
+                            {/* Content */}
+                            <div className="p-6">
+                                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-gold-400 transition-colors">
+                                    {activity.title}
+                                </h3>
+                                <p className="text-gold-500 text-xs font-medium mb-3">
+                                    <i className="fas fa-building mr-2"></i>
+                                    {activity.subtitle}
+                                </p>
+                                <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
+                                    {activity.description}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* View More Button */}
+                <div className="text-center">
+                    <Link
+                        to="/customers"
+                        className="inline-flex items-center gap-2 px-8 py-3 bg-gold-500 hover:bg-gold-400 text-black font-bold rounded-full transition-colors shadow-lg"
+                    >
+                        ดูทั้งหมด
+                        <i className="fas fa-arrow-right"></i>
+                    </Link>
+                </div>
             </div>
         </section>
     );

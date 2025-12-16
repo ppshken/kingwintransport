@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS vehicle_images;
 DROP TABLE IF EXISTS vehicle_types;
 DROP TABLE IF EXISTS services;
 DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS partners;
 DROP TABLE IF EXISTS articles;
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS admins;
@@ -53,8 +54,22 @@ CREATE TABLE services (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Customers Table
+-- Customers Table (Activity Gallery)
 CREATE TABLE customers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(200) NOT NULL,
+    subtitle VARCHAR(200),
+    description TEXT,
+    image VARCHAR(500),
+    tags TEXT,
+    display_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Partners Table (separate from Customers)
+CREATE TABLE partners (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(200) NOT NULL,
     logo_url VARCHAR(500),
@@ -97,3 +112,4 @@ CREATE INDEX idx_slug ON articles(slug);
 CREATE INDEX idx_published_at ON articles(published_at);
 CREATE INDEX idx_status ON contacts(status);
 CREATE INDEX idx_is_active ON customers(is_active);
+CREATE INDEX idx_partners_is_active ON partners(is_active);

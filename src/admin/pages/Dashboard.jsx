@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import AdminLayout from '../components/AdminLayout';
 import { vehicleTypeService } from '../../services/vehicleTypeService';
 import { serviceService } from '../../services/serviceService';
+import { partnerService } from '../../services/partnerService';
 import { customerService } from '../../services/customerService';
 import { articleService } from '../../services/articleService';
 import { contactService } from '../../services/contactService';
@@ -10,6 +11,7 @@ export default function Dashboard() {
     const [stats, setStats] = useState({
         vehicleTypes: 0,
         services: 0,
+        partners: 0,
         customers: 0,
         articles: 0,
         contacts: 0
@@ -22,9 +24,10 @@ export default function Dashboard() {
 
     const loadStats = async () => {
         try {
-            const [vehicleTypes, services, customers, articles, contacts] = await Promise.all([
+            const [vehicleTypes, services, partners, customers, articles, contacts] = await Promise.all([
                 vehicleTypeService.getAll(),
                 serviceService.getAll(),
+                partnerService.getAll(),
                 customerService.getAll(),
                 articleService.getAll(1, 100),
                 contactService.getAll()
@@ -33,6 +36,7 @@ export default function Dashboard() {
             setStats({
                 vehicleTypes: vehicleTypes.length,
                 services: services.length,
+                partners: partners.length,
                 customers: customers.length,
                 articles: articles.total || articles.data?.length || 0,
                 contacts: contacts.length
@@ -47,7 +51,8 @@ export default function Dashboard() {
     const statCards = [
         { label: 'ประเภทรถ', value: stats.vehicleTypes, icon: 'fas fa-bus', color: 'bg-blue-500' },
         { label: 'บริการ', value: stats.services, icon: 'fas fa-concierge-bell', color: 'bg-green-500' },
-        { label: 'ลูกค้า', value: stats.customers, icon: 'fas fa-users', color: 'bg-purple-500' },
+        { label: 'พาร์ทเนอร์', value: stats.partners, icon: 'fas fa-users', color: 'bg-purple-500' },
+        { label: 'ลูกค้า', value: stats.customers, icon: 'fas fa-user-tie', color: 'bg-teal-500' },
         { label: 'บทความ', value: stats.articles, icon: 'fas fa-newspaper', color: 'bg-orange-500' },
         { label: 'ข้อความติดต่อ', value: stats.contacts, icon: 'fas fa-envelope', color: 'bg-red-500' },
     ];
@@ -67,7 +72,7 @@ export default function Dashboard() {
                     </div>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {statCards.map((card, index) => (
                         <div
                             key={index}

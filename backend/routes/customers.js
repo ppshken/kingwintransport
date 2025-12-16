@@ -4,12 +4,10 @@ const customerController = require('../controllers/customerController');
 const authMiddleware = require('../middleware/auth');
 const { validate, validators } = require('../utils/validators');
 
-// Validation rules
+// Validation rules for new schema - simplified
 const customerValidation = [
-    validators.requiredString('name', 2, 200),
-    validators.optionalString('logo_url', 500),
-    validators.integer('display_order', 0),
-    validators.boolean('is_active'),
+    validators.requiredString('title', 2, 200),
+    // All other fields are optional - no validation needed
     validate
 ];
 

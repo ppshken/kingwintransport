@@ -18,12 +18,14 @@ export default function Hero() {
                     พร้อมดูแลคุณดุจญาติมิตร ตลอดการเดินทาง
                 </p>
                 <div className="flex flex-col md:flex-row gap-4 justify-center">
-                    <Link
-                        to="/contact"
+                    <a
+                        href="https://script.google.com/macros/s/AKfycbwI-nqrOcBlPgnigckVHeZdfriCUGs_CyCGuSHtH4_58E0o4jeZqLygYDNd1HtjpTBh/exec"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="btn-gold px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-gold-500/50 transform hover:-translate-y-1 transition-all"
                     >
                         จองรถทันที <i className="fas fa-arrow-right ml-2"></i>
-                    </Link>
+                    </a>
                     <Link
                         to="/service"
                         className="px-8 py-4 rounded-full border border-gray-600 hover:border-gold-500 text-white hover:text-gold-500 transition-all font-medium backdrop-blur-sm bg-white/5"

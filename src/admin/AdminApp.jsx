@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import VehicleTypes from './pages/VehicleTypes';
 import Services from './pages/Services';
+import Partners from './pages/Partners';
 import Customers from './pages/Customers';
 import Articles from './pages/Articles';
 import VehicleImages from './pages/VehicleImages';
@@ -26,6 +27,11 @@ export default function AdminApp() {
             <Route path="/services" element={
                 <ProtectedRoute>
                     <Services />
+                </ProtectedRoute>
+            } />
+            <Route path="/partners" element={
+                <ProtectedRoute>
+                    <Partners />
                 </ProtectedRoute>
             } />
             <Route path="/customers" element={

@@ -10,6 +10,7 @@ const authRoutes = require('./routes/auth');
 const vehicleTypeRoutes = require('./routes/vehicleTypes');
 const vehicleImageRoutes = require('./routes/vehicleImages');
 const serviceRoutes = require('./routes/services');
+const partnerRoutes = require('./routes/partners');
 const customerRoutes = require('./routes/customers');
 const articleRoutes = require('./routes/articles');
 const contactRoutes = require('./routes/contacts');
@@ -30,6 +31,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/vehicle-types', vehicleTypeRoutes);
 app.use('/api/vehicle-images', vehicleImageRoutes);
 app.use('/api/services', serviceRoutes);
+app.use('/api/partners', partnerRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/articles', articleRoutes);
 app.use('/api/contacts', contactRoutes);
@@ -45,6 +47,7 @@ app.get('/', (req, res) => {
             vehicleTypes: '/api/vehicle-types',
             vehicleImages: '/api/vehicle-images',
             services: '/api/services',
+            partners: '/api/partners',
             customers: '/api/customers',
             articles: '/api/articles',
             contacts: '/api/contacts'

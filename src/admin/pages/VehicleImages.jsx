@@ -198,7 +198,7 @@ export default function VehicleImages() {
                                             >
                                                 <div className="aspect-square bg-gray-100 relative">
                                                     <img
-                                                        src={`http://localhost:5000${image.image_url}`}
+                                                        src={`${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000'}${image.image_url}`}
                                                         alt={`Image ${image.id}`}
                                                         className="w-full h-full object-cover"
                                                         onError={(e) => {

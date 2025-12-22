@@ -44,7 +44,7 @@ export default function Service() {
 
         setCurrentGallery({
             title: `แกลเลอรี่: ${vehicleType?.name || 'รถ'}`,
-            images: images.map(img => `http://localhost:5000${img.image_url}`)
+            images: images.map(img => `${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000'}${img.image_url}`)
         });
         setModalOpen(true);
     };
@@ -65,7 +65,7 @@ export default function Service() {
     const getMainImage = (vehicleTypeId) => {
         const images = vehicleImages[vehicleTypeId] || [];
         if (images.length > 0) {
-            return `http://localhost:5000${images[0].image_url}`;
+            return `${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000'}${images[0].image_url}`;
         }
         return 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2070&auto=format&fit=crop';
     };

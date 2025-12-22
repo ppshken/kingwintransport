@@ -141,7 +141,7 @@ export default function Customers() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        {[1, 2, 3].map((item) => (
+                        {["โรงเรียนเตรียมอุดมศึกษาพัฒนาการ", "มหาวิทยาลัยราชภัฏราชนครินทร์", "โรงเรียนวัดหย่วนวิทยา"].map((item) => (
                             <div key={item} className="bg-dark-900 p-8 rounded-2xl border border-gray-800 relative">
                                 <i className="fas fa-quote-left text-gold-500 text-4xl mb-6 opacity-30"></i>
                                 <p className="text-gray-400 mb-6 italic">
@@ -149,11 +149,8 @@ export default function Customers() {
                                     ประทับใจมากครับ จะกลับมาใช้บริการอีกแน่นอน"
                                 </p>
                                 <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-gray-700 rounded-full overflow-hidden">
-                                        <img src={`https://i.pravatar.cc/150?img=${item + 10}`} alt="User" />
-                                    </div>
                                     <div>
-                                        <h4 className="text-white font-bold">คุณลูกค้า {item}</h4>
+                                        <h4 className="text-white font-bold">{item}</h4>
                                         <p className="text-gold-500 text-xs">ผู้ใช้บริการจริง</p>
                                     </div>
                                 </div>

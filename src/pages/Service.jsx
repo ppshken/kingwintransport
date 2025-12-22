@@ -156,9 +156,14 @@ export default function Service() {
 
                                     {/* Action Buttons */}
                                     <div className="flex gap-4">
-                                        <Link to="/contact" className="btn-gold px-8 py-3 rounded-full font-bold shadow-lg">
-                                            สนใจจองรถ <i className="fas fa-arrow-right ml-2"></i>
-                                        </Link>
+                                        <a
+                                            href="https://script.google.com/macros/s/AKfycbwI-nqrOcBlPgnigckVHeZdfriCUGs_CyCGuSHtH4_58E0o4jeZqLygYDNd1HtjpTBh/exec"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="btn-gold px-8 py-3 rounded-full font-bold shadow-lg"
+                                        >
+                                            จองรถทันที <i className="fas fa-arrow-right ml-2"></i>
+                                        </a>
                                         {vehicleImages[vehicle.id]?.length > 0 && (
                                             <button
                                                 onClick={() => openGallery(vehicle.id)}

@@ -27,10 +27,10 @@ export default function PartnerSection() {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                     <div>
                         <h3 className="text-gold-500 font-bold tracking-widest uppercase mb-2">
-                            Partner ของเรา
+                            บริษัทในเครือของเรา
                         </h3>
                         <h2 className="text-3xl md:text-4xl font-bold text-white">
-                            Partner ของเรา
+                            บริษัทในเครือของเรา
                         </h2>
                     </div>
                     <p className="text-gray-400 mt-4 md:mt-0 max-w-md text-right">

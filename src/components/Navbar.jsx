@@ -83,7 +83,7 @@ export default function Navbar() {
                 <Link to="/about" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>เกี่ยวกับเรา</Link>
                 <Link to="/service" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>บริการ</Link>
                 <Link to="/customers" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>ลูกค้าของเรา</Link>
-                <Link to="/partner" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>คู่ค้าของเรา</Link>
+                <Link to="/partner" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>บริษัทในเครือ</Link>
                 <Link to="/blog" className="mobile-link text-2xl font-light text-white hover:text-gold-500" onClick={() => setIsOpen(false)}>บทความ</Link>
                 <Link to="/contact" className="mobile-link text-2xl font-bold text-gold-500" onClick={() => setIsOpen(false)}>ติดต่อเรา</Link>
             </div>
